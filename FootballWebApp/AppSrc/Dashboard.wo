@@ -1,0 +1,155 @@
+﻿
+Use cWebView.pkg
+Use cWebPanel.pkg
+Use cWebForm.pkg
+Use cWebButton.pkg
+Use cWebGroup.pkg
+Use cWebSpacer.pkg
+Use cWebHtmlBox.pkg
+Use cWebMenuGroup.pkg
+Use cWebMenuItem.pkg
+Use cWebLabel.pkg
+Use cWebList.pkg
+Use cWebColumn.pkg
+
+Object oDashboard is a cWebView
+
+    Set piMaxWidth to 1024
+    Set psCaption to "Dashboard"
+    Set peViewType to vtUndefined
+    Set pbShowCaption to False
+    Set psCSSClass to "Dashboard"
+
+    Object oWebMainPanel is a cWebPanel
+
+        Set piColumnCount to 24
+        Set peLayoutType to ltGrid
+
+        Object oWelcomeTile is a cWebHtmlBox
+
+            Set piColumnIndex to 0
+            Set piColumnSpan to 12
+            Set psCSSClass to "Tile Light"
+            Set psHtml to '<div Class="WebCon_Sizer"><div class="Tile_Title">Welcome</div></div>'
+
+            Procedure OnLoad
+                Send UpdateHTML ('<div class="WebCon_Sizer">' + ;
+                                 '<div class="Tile_Title">Bienvenidos</div>' + ;
+                                 '<div class="Tile_Subtitle">' - htmlEncode(psUserName(ghoWebSessionManager)) - '</div>' + ;
+                                 '</div>')
+            End_Procedure
+
+        End_Object
+        Object oTileJugador is a cWebHtmlBox
+
+            Set pbServerOnClick to True
+            Set piColumnIndex to 12
+            Set piColumnSpan to 12 
+            Set psCSSClass to "Tile LightAlternate"
+            Set psHtml to '<div class="WebCon_Sizer" data-ServerOnClick="openview"><div class="Tile_Title">Jugadores</div></div>'
+
+            WebRegisterPath ntNavigateForwardCustom oSelectJugador
+
+            Procedure OnClick String sId String sParam
+                Send NavigatePath
+            End_Procedure
+
+        End_Object
+
+        Object oTileEntrenador is a cWebHtmlBox
+
+            Set pbServerOnClick to True
+           Set piColumnIndex to 0
+            Set piColumnSpan to 12 
+           
+            Set psCSSClass to "Tile Light"
+            Set psHtml to '<div class="WebCon_Sizer" data-ServerOnClick="openview"><div class="Tile_Title">Entrenadores</div></div>'
+
+            WebRegisterPath ntNavigateForwardCustom oSelectEntrenador
+
+            Procedure OnClick String sId String sParam
+                Send NavigatePath
+            End_Procedure
+
+        End_Object
+
+        Object oTilePosicion is a cWebHtmlBox
+
+            Set pbServerOnClick to True
+            Set piColumnIndex to 12
+            Set piColumnSpan to 12 
+            Set psCSSClass to "Tile Dark"
+            Set psHtml to '<div class="WebCon_Sizer" data-ServerOnClick="openview"><div class="Tile_Title">Posiciones</div></div>'
+
+            WebRegisterPath ntNavigateForwardCustom oSelectPosicion
+
+            Procedure OnClick String sId String sParam
+                Send NavigatePath
+            End_Procedure
+
+        End_Object
+
+        Object oTileEquipo is a cWebHtmlBox
+
+            Set pbServerOnClick to True
+            Set piColumnIndex to 0
+            Set piColumnSpan to 12 
+            Set psCSSClass to "Tile DarkAlternate"
+            Set psHtml to '<div class="WebCon_Sizer" data-ServerOnClick="openview"><div class="Tile_Title">Equipos</div></div>'
+
+            WebRegisterPath ntNavigateForwardCustom oSelectEquipo
+
+            Procedure OnClick String sId String sParam
+                Send NavigatePath
+            End_Procedure
+
+        End_Object
+
+        Object oTileLiga is a cWebHtmlBox
+
+            Set pbServerOnClick to True
+          Set piColumnIndex to 12
+            Set piColumnSpan to 12 
+            Set psCSSClass to "Tile LightAlternate"
+            Set psHtml to '<div class="WebCon_Sizer" data-ServerOnClick="openview"><div class="Tile_Title">Ligas</div></div>'
+
+            WebRegisterPath ntNavigateForwardCustom oSelectLiga
+
+            Procedure OnClick String sId String sParam
+                Send NavigatePath
+            End_Procedure
+
+        End_Object
+
+        WebSetResponsive piColumnCount rmMobile to 1
+        WebSetResponsive piColumnCount rmTabletPortrait to 16
+
+        Object oTiles_grp is a cWebGroup
+
+            Set piColumnSpan to 24
+            Set pbShowBorder to False
+            Set pbShowCaption to False
+            Set piColumnCount to 12
+            Set psCSSClass to "TilesGroup"
+
+            // TARJETA DE BIENVENIDA
+
+            // TARJETA LIGAS
+
+            // TARJETA POSICIONES
+
+            // TARJETA EQUIPOS
+
+            // TARJETA ENTRENADORES
+
+            // TARJETA JUGADORES
+
+        End_Object
+
+    End_Object
+
+    Procedure OnBeforeShow
+        // Actualizacion de la vista Dashboard
+    End_Procedure
+
+End_Object
